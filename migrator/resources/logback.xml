@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+      <providers>
+        <pattern>
+          <pattern>
+            {
+              "timestamp":"%d{yyyy-MM-dd'T'HH:mm:ss.SSS}",
+              "thread":"%thread",
+              "level":"%level",
+              "logger":"%logger",
+              "event":"#tryJson{%message}",
+              "exception":"%rootException{short}",
+              "stack_trace":"%rootException"
+            }
+          </pattern>
+        </pattern>
+      </providers>
+    </encoder>
+  </appender>
+
+  <!-- Replace name (e.g. com.example) with base namespace of your app -->
+  <logger name="migrator" additivity="false">
+    <!-- You may want to set the level to DEBUG in development -->
+    <level value="${LOG_LEVEL:-DEBUG}"/>
+    <appender-ref ref="STDOUT" />
+  </logger>
+
+</configuration>
