@@ -4,7 +4,7 @@
             [clojure.tools.logging.impl :refer [disabled-logger-factory]]
             [clojure.java.shell :refer [sh]]
             [clojure.tools.namespace.repl :refer [refresh refresh-all]]
-            [migrator.migrate :refer [perform-migrate   perform-rollback]]))
+            [migrator.migrate :refer [perform-migrate-process   perform-rollback-process]]))
 
 (defn run-tests
   "Refresh all code, then run tests (w/ logging disabled)"

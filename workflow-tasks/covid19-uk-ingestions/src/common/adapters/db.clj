@@ -52,7 +52,7 @@
 
 
 (defn setup-db []
-  (cfg/set :db (create-connection-pool (cfg/get :db))))
+  (cfg/set :db (create-connection-pool  (cfg/get :db))))
 
 
 (def ->json json/generate-string)

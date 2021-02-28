@@ -1,7 +1,0 @@
-{:db {:dbtype "postgresql"
-      :dbname "covid19_test"
-      :host "localhost"
-      :port 5433
-      :user "covid_user"
-      :password "covid_password"}
- }
