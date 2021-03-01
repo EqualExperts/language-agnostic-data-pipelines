@@ -2,6 +2,5 @@
         day date PRIMARY KEY,
         payload jsonb NOT NULL,
         created_at timestamp without time zone NOT NULL DEFAULT now(),
-        updated_at timestamp without time zone NOT NULL DEFAULT now());
-"]
+        updated_at timestamp without time zone NOT NULL DEFAULT now());"]
  :down ["DROP TABLE covid_19_ingestion;"]}

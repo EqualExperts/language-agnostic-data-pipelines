@@ -8,6 +8,7 @@
 
 (defn fetch-date
   [local-date]
-  (let [result (client/get (format url (time/format date-format local-date)))]
-  {:day local-date
-   :payload (-> result :body (json/parse-string true) :data)}))
+  (let [request-url (format url (time/format date-format local-date))
+        result (client/get request-url)]
+    {:day local-date
+     :payload (-> result :body (json/parse-string true) :data)}))

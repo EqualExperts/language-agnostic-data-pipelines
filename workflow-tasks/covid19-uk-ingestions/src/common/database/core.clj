@@ -1,12 +1,11 @@
-(ns common.adapters.db
-(:import org.postgresql.util.PGobject)
-(:require [next.jdbc.prepare :as prepare]
-  [next.jdbc.result-set :as rs]
-  [cheshire.core :as json]
-  [omniconf.core :as cfg]
-  [next.jdbc.date-time :as date-time])
-(:import com.mchange.v2.c3p0.ComboPooledDataSource))
-
+(ns common.database.core
+  (:import org.postgresql.util.PGobject)
+  (:require [next.jdbc.prepare :as prepare]
+            [next.jdbc.result-set :as rs]
+            [cheshire.core :as json]
+            [omniconf.core :as cfg]
+            [next.jdbc.date-time :as date-time])
+  (:import com.mchange.v2.c3p0.ComboPooledDataSource))
 
 (def db-config
   {:db {:nested {:dbtype {:description "type of the database"
@@ -32,14 +31,14 @@
 (defn- build-jdbc-url
   [config]
   (str
-    "jdbc:"
-    (:dbtype config)
-    "://"
-    (:host config)
-    ":"
-    (:port config)
-    "/"
-    (:dbname config)))
+   "jdbc:"
+   (:dbtype config)
+   "://"
+   (:host config)
+   ":"
+   (:port config)
+   "/"
+   (:dbname config)))
 
 (defn- create-connection-pool [config]
   (doto (ComboPooledDataSource.)

@@ -1,0 +1,2 @@
+{:lint-as {clojure.java.jdbc/with-db-transaction clojure.core/let
+           test-helpers.test/deftest-with-db clojure.test/deftest}}

@@ -2,16 +2,27 @@
   (:require [next.jdbc.sql :as sql]
             [java-time :as time]))
 
+(def ^:private table-name "covid_19_ingestion")
+(def ^:private cols ["day" "payload"])
+(def ^:private on-conflict-clause "ON CONFLICT (day) DO UPDATE SET payload=excluded.payload, updated_at = DEFAULT")
 
-(def table-name "covid_19_ingestion")
-(def cols ["day" "payload"])
-(def on-conflict-clause "ON CONFLICT (day) DO UPDATE SET payload=excluded.payload, updated_at = now()")
+(def ^:private default-last-ingested-date "2019-12-31")
 
-(defn insert-rows [db data]
-  (let [rows (mapv vals data)]
-    (sql/insert-multi! db table-name cols rows {:suffix on-conflict-clause})))
+(defn insert-rows
+  [db data]
+  (let [rows (map vals data)]
+    (sql/insert-multi! db
+                       table-name
+                       cols
+                       rows
+                       {:suffix on-conflict-clause})))
 
-(defn last-ingested-date [db]
-  (-> (sql/query db ["SELECT coalesce(max(day),'2019-12-31') as date FROM covid_19_ingestion"]) first :date time/local-date))
+(defn last-ingested-date
+  [db]
+  (let [query-sql (format "SELECT coalesce(max(day),'%s') as date FROM %s" default-last-ingested-date table-name)]
+    (->> (sql/query db [query-sql])
+         first
+         :date
+         time/local-date)))
 
 
