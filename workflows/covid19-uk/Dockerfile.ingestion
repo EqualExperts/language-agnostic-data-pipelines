@@ -1,0 +1,3 @@
+FROM openjdk:11
+ADD workflow-tasks/covid19-uk-ingestions/target/covid19-uk-ingestions.jar covid19-uk-ingestions.jar
+WORKDIR /

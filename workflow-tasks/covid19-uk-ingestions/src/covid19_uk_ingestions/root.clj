@@ -21,7 +21,7 @@
   (let [profile (name (or (-> args first) "dev"))
         config-file (io/resource (str (name profile) ".config.edn"))]
     (cfg/populate-from-file config-file true)
-    (cfg/populate-from-cmd args true)))
+    (cfg/populate-from-cmd (drop 1 args) true)))
 
 (defn -main
   [& args]

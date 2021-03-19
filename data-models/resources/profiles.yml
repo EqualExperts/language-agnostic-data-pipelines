@@ -3,23 +3,10 @@ dev:
   outputs:
     covid19_dev:
       type: postgres
-      host: "localhost"
+      host: "postgres-postgresql"
       user: "covid19_user"
       pass: "covid19_password"
-      port: 5434
+      port: 5432
       schema: "public"
       dbname: "covid19_dev"
-      threads: 1
-
-test:
-  target: covid19_test
-  outputs:
-    covid19_test:
-      type: postgres
-      host: "localhost"
-      user: "covid19_user"
-      pass: "covid19_password"
-      port: 5434
-      schema: "public"
-      dbname: "covid19_test"
       threads: 1

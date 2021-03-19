@@ -2,11 +2,14 @@
 version: 2
 
 models:
-    - name: my_first_dbt_model
+    - name: covid_19_cases_per_day
       description: "A starter dbt model"
       columns:
-          - name: id
-            description: "The primary key for this table"
+          - name: day
+            description: "Day"
             tests:
                 - unique
                 - not_null
+          - name: cases
+            description: "Daily covid19 cases in Uk"
+        

@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
+metadata:
+  name: "{{ .Values.name }}"
+  namespace: argo
+spec:
+  schedule: "0 0 * * *"
+  concurrencyPolicy: "Forbid"
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  workflowSpec:
+    entrypoint: ingestion
+    serviceAccountName: argo
+    arguments:
+      parameters:
+        - name: start-date
+          value: ""
+        - name: end-date
+          value: ""
+    ttlStrategy:
+      secondsAfterCompletion: 260000 #3 days
+    workflowTemplateRef:
+      name: "{{ .Release.Name }}"

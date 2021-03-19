@@ -1,0 +1,6 @@
+environment: dev
+name: covid19-uk
+ingestion:
+  image: covid19ukingestions:latest
+transformation:
+  image: covid19dbt:latest

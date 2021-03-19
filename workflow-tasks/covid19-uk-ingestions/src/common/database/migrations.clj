@@ -4,7 +4,8 @@
             [clojure.tools.logging :as log]
             [ragtime.jdbc :as sql]
             [ragtime.repl :as repl]
-            [common.database.core :as db-core]))
+            [common.database.core :as db-core])
+  (:gen-class))
 
 (defn- reporter
   [_ op id]
@@ -32,13 +33,14 @@
 
 (defn- setup-db-config
   [profile]
+  (prn (str profile ".config.edn"))
   (cfg/define db-core/db-config)
   (cfg/populate-from-file  (io/resource (str profile ".config.edn")))
 
   (cfg/get :db))
 
 (defn perform-db-migrations
-  [& args]
+  [args]
   (-> args
       first 
       (or "dev")
@@ -46,9 +48,14 @@
       perform-migrate))
 
 (defn rollback-previous-migration
-  [& args]
+  [args]
   (-> args
       first
       (or "dev")
       setup-db-config
       perform-rollback))
+
+(defn -main
+  [& args]
+
+  (perform-db-migrations args))

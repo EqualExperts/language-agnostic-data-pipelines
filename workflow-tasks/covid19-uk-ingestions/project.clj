@@ -19,7 +19,7 @@
                                   [org.testcontainers/testcontainers "1.15.2"]]
                    :source-paths ["dev"]
                    :repl-options {:init-ns user}}
+             :db-migrations { :uberjar-name "db-migrations.jar"
+                         :main common.database.migrations}
 
-             :uberjar {:aot :all}}
-  :aliases {"migrate"  ["run" "-m" "common.database.migrations/perform-db-migrations"]
-            "rollback" ["run" "-m" "common.database.migrations/rollback-previous-migration"]})
+             :uberjar {:aot :all}})
