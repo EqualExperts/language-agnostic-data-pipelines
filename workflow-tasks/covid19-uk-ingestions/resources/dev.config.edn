@@ -3,6 +3,6 @@
       :dbname "covid19_dev"
       :host "localhost"
       :port 5433
-      :user "covid_user"
-      :password "covid_password"}
+      :user "covid19_user"
+      :password "covid19_password"}
  }
