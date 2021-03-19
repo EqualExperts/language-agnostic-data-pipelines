@@ -11,6 +11,7 @@
                  [clojure.java-time "0.3.2"]]
   :main covid19-uk-ingestions.root
   :plugins [[lein-ancient "0.7.0"]]
+  :uberjar-name "covid19-uk-ingestions.jar"
   :resource-paths ["resources"]
   :profiles {:dev {:dependencies [[eftest "0.5.9"]
                                   [org.clojure/tools.namespace "0.2.11" :upgrade false]

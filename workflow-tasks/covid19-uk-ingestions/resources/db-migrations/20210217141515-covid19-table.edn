@@ -1,6 +1,6 @@
 {:up ["CREATE TABLE IF NOT EXISTS covid_19_ingestion (
         day date PRIMARY KEY,
-        payload jsonb NOT NULL,
+        payload jsonb,
         created_at timestamp without time zone NOT NULL DEFAULT now(),
         updated_at timestamp without time zone NOT NULL DEFAULT now());"]
  :down ["DROP TABLE covid_19_ingestion;"]}
