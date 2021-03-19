@@ -2,7 +2,7 @@
       :classname "org.postgresql.Driver"
       :dbname "covid19_dev"
       :host "localhost"
-      :port 5433
+      :port 5434
       :user "covid19_user"
       :password "covid19_password"}
  }

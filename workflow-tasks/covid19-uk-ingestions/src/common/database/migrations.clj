@@ -32,28 +32,23 @@
 
 (defn- setup-db-config
   [profile]
-
   (cfg/define db-core/db-config)
-
-  (prn "PROFILE" profile)
-  (cfg/populate-from-file (io/resource (str profile ".config.edn")))
+  (cfg/populate-from-file  (io/resource (str profile ".config.edn")))
 
   (cfg/get :db))
 
 (defn perform-db-migrations
   [& args]
   (-> args
-      (or #(-> % first) "dev")
+      first 
+      (or "dev")
       setup-db-config
       perform-migrate))
-;;   (let [profile (or (-> args first) "dev")]
-;;     (perform-migrate (setup-db-config profile)))
 
 (defn rollback-previous-migration
   [& args]
   (-> args
-      (or #(-> % first) "dev")
+      first
+      (or "dev")
       setup-db-config
       perform-rollback))
-;;   (let [profile (or (-> args first) "dev")]
-;;     (perform-rollback (setup-db-config profile))))

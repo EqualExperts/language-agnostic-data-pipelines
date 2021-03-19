@@ -19,4 +19,6 @@
                    :source-paths ["dev"]
                    :repl-options {:init-ns user}}
 
-             :uberjar {:aot :all}})
+             :uberjar {:aot :all}}
+  :aliases {"migrate"  ["run" "-m" "common.database.migrations/perform-db-migrations"]
+            "rollback" ["run" "-m" "common.database.migrations/rollback-previous-migration"]})
