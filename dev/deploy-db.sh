@@ -9,3 +9,5 @@ helm install -n argo postgres bitnami/postgresql \
  --set global.postgresql.postgresqlPassword=covid19_password \
  --set global.postgresql.postgresqlDatabase=covid19_dev \
  --set global.postgresql.servicePort=5432
+
+sleep 30
