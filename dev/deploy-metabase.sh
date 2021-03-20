@@ -13,3 +13,5 @@ helm install -n argo metabase-postgres bitnami/postgresql \
 helm repo add stable https://charts.helm.sh/stable --force-update --allow-deprecated-repos 
 
 helm install -n argo  metabase -f metabase-config.yml stable/metabase
+
+kubectl run postgres-postgresql-client --rm -i --restart='Never' --namespace argo --image docker.io/bitnami/postgresql:11.11.0-debian-10-r31 --env="PGPASSWORD=metabase_password" --command -- psql --host metabase-postgres-postgresql -U metabase_user -d metabase -p 5433 < metabase_dump.sql
