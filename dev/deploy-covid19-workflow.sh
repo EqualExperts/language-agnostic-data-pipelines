@@ -12,7 +12,7 @@ cd ../../
 
 # create ingestion and transformation docker images
 docker build -f workflows/covid19-uk/Dockerfile.ingestion -t covid19ukingestions:latest .
-docker build -f workflows/covid19-uk/Dockerfile.transformation -t covid19-dbt:latest .
+docker build -f workflows/covid19-uk/Dockerfile.transformation -t covid19dbt:latest .
 
 # cleanup old argo template
 argo -n argo template delete covid19-uk
