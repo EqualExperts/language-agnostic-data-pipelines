@@ -4,7 +4,7 @@ metadata:
   name: "{{ .Values.name }}"
   namespace: argo
 spec:
-  schedule: "0 0 * * *"
+  schedule: "0 * * * *"
   concurrencyPolicy: "Forbid"
   successfulJobsHistoryLimit: 1
   failedJobsHistoryLimit: 1

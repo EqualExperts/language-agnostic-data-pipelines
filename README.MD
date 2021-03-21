@@ -21,7 +21,7 @@ kubectl port-forward --namespace argo $ARGO_POD_NAME 2746:2746
 
 > http://localhost:2746/workflows/argo
 
-Porforward to Metabase to see the data (login is devuser@somemail.com / metabase_password1)
+Porforward to Metabase to see the data (login is devuser@somemail.com / metabase_password1.)
 
 export METABASE_POD_NAME=$(kubectl get pods --namespace argo -l "app=metabase,release=metabase" -o jsonpath="{.items[0].metadata.name}")
 kubectl port-forward --namespace argo $METABASE_POD_NAME 8080:3000

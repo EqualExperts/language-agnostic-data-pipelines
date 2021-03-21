@@ -24,7 +24,7 @@ helm template covid19-uk workflows/covid19-uk --set environment=dev --set name=c
 argo -n argo template create outputs/covid19-uk/templates/workflow-template.yaml
 
 # deleting old cron workflow 
-kubectl -n argo delete cwf covid19-uk --cascade=orphan
+kubectl -n argo delete cwf covid19-uk
 
 # create workflow template on argo
 argo -n argo cron create outputs/covid19-uk/templates/cron-workflow.yaml

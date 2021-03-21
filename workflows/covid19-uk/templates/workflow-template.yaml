@@ -17,7 +17,7 @@ spec:
       steps:
         - - name: ExtractAndLoad
             template: covid19-uk
-        - - name: dbt-run
+        - - name: Transform
             template: dbt-run    
     - name: covid19-uk
       container:
