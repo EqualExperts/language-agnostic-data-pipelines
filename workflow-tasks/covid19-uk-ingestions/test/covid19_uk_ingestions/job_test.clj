@@ -66,6 +66,7 @@
     (let [{:keys [db] :as config} {:db *db*}]
 
       (sql/insert! db "covid_19_ingestion" (get expectations 1))
+      (sql/insert! db "covid_19_ingestion" (assoc (get expectations 2) :payload []))
 
       (with-redefs [client/get (constantly (get api-fixtures "2020-01-03"))
                     sut/today (constantly (time/local-date covid-api/date-format "2020-01-03"))]

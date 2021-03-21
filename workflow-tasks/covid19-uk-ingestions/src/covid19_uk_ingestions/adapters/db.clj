@@ -19,7 +19,7 @@
 
 (defn last-ingested-date
   [db]
-  (let [query-sql (format "SELECT coalesce(max(day),'%s') as date FROM %s" default-last-ingested-date table-name)]
+  (let [query-sql (format "SELECT coalesce(max(day),'%s') as date FROM %s WHERE payload != '[]'::jsonb" default-last-ingested-date table-name)]
     (->> (sql/query db [query-sql])
          first
          :date
