@@ -1,4 +1,4 @@
-## This repo contains a sample covid19 data pipeline using the following architecture: ...
+## This repo contains a sample covid19 data pipeline using Argo and Dbt
 
 ### Requirements (osx using homebrew):
 ```bash
