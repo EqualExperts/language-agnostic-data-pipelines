@@ -1,9 +1,14 @@
 ## Language Agnostic Data Pipelines (Using Argo and Dbt)
 
 
-Here is a complete use case that contains a data pipeline to ingest uk covid19 data (https://api.coronavirus.data.gov.uk). The Ingestion (inside workflow tasks) has tests as any other piece of software, and it was developed using practises like TDD. The Pipeline has data quality tests that run each time data is ingested, checking for null values on columns that should not be null, also for negative numbers of cases that should not happen.
+This is a complete use case that contains a data pipeline to ingest uk covid19 data (https://api.coronavirus.data.gov.uk). 
+The Ingestion (inside workflow tasks) is a clojure project and it was developed using practises like TDD. 
+The Pipeline has data quality tests that run each time data is ingested, checking for null values on columns that should not be null, also for negative numbers of cases that should not happen.
 
 It uses a local kubernetes cluster which launches Argo and a database where covid19 data is loaded and transformed. Also to see the data we are spinning up an instance of metabase connected to the same database.
+
+The intent of the repo is to share this approach to make data pipelines with the simplest data pipeline that can be easily changed and adapted. 
+There wasn't any effort to make complex analytics transformations or to handle a large amount of data. 
 
 ### Requirements (osx using homebrew):
 ```bash
