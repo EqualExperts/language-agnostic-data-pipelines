@@ -18,7 +18,9 @@ spec:
         - - name: ExtractAndLoad
             template: covid19-uk
         - - name: Transform
-            template: dbt-run    
+            template: dbt-run   
+        - - name: Test
+            template: dbt-test    
     - name: covid19-uk
       container:
         name: covid19ukingestions
@@ -43,5 +45,14 @@ spec:
         command: ["/bin/sh", "-c"]
         args:
           - >-
-            dbt run --project-dir data-models --profiles-dir resources/ --profile {{ .Values.environment }} &&
-            dbt test --project-dir data-models --profiles-dir resources/ --profile {{ .Values.environment }}  --schema
+            dbt run --project-dir data-models --profiles-dir resources/ --profile {{ .Values.environment }}  -m models/example/covid_19_cases_per_day.sql
+    - name: dbt-test
+      container:
+        name: dbt-test
+        image: "{{ .Values.transformation.image }}"
+        imagePullPolicy: Never
+        command: ["/bin/sh", "-c"]
+        args:
+          - >-
+            dbt test --project-dir data-models --profiles-dir resources/ --profile {{ .Values.environment }}  --schema &&
+            dbt test --project-dir data-models --profiles-dir resources/ --profile {{ .Values.environment }}
