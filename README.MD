@@ -1,5 +1,5 @@
 ## This repo contains a sample covid19 data pipeline using Argo and Dbt
-The intent of this data pipeline is to be a ‘initial sample’, so we didn’t make any effort to make a complex modelling or to work with a large amount of data. It uses a local kubernetes cluster which launches Argo and a database where covid19 data is loaded and transformed. Also to see the data we are spinning up an instance of metabase connected to the same database.
+The intent of this data pipeline is to be a ‘initial sample’, there was no effort to make a complex modelling or to work with a large amount of data. It uses a local kubernetes cluster which launches Argo and a database where covid19 data is loaded and transformed. Also to see the data we are spinning up an instance of metabase connected to the same database.
 
 ### Requirements (osx using homebrew):
 ```bash
