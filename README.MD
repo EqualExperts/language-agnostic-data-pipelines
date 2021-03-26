@@ -1,5 +1,9 @@
-## This repo contains a sample covid19 data pipeline using Argo and Dbt
-The intent of this data pipeline is to be a ‘initial sample’, there was no effort to make a complex modelling or to work with a large amount of data. It uses a local kubernetes cluster which launches Argo and a database where covid19 data is loaded and transformed. Also to see the data we are spinning up an instance of metabase connected to the same database.
+## Language Agnostic Data Pipelines (Using Argo and Dbt)
+
+
+Here is a complete use case that contains a data pipeline to ingest uk covid19 data (https://api.coronavirus.data.gov.uk). The Ingestion (inside workflow tasks) has tests as any other piece of software, and it was developed using practises like TDD. The Pipeline has data quality tests that run each time data is ingested, checking for null values on columns that should not be null, also for negative numbers of cases that should not happen.
+
+It uses a local kubernetes cluster which launches Argo and a database where covid19 data is loaded and transformed. Also to see the data we are spinning up an instance of metabase connected to the same database.
 
 ### Requirements (osx using homebrew):
 ```bash
