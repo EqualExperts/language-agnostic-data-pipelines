@@ -31,7 +31,7 @@ cd dev
 ### Walkthrough
 
 
-#### Argo 
+### Argo Workflows 
 
 During the deploy there are two workflows deployed on argo.
  - Data Migration workflow which creates the table needed for the example. The Migration is using a clojure library (ragtime) to handle migrations.
@@ -57,7 +57,7 @@ See the workflow template which is the base workflow for the pipeline (it's poss
 > http://localhost:2746/workflow-templates/argo
 
 
-#### Metabase (login is devuser@somemail.com / metabase_password1.)
+### Metabase 
 
 There is an instance of metabase deployed with the example that allows to view the data. There is a pre-made
 question created to show covid19 Data (just click in browse all items on the homepage)
@@ -67,7 +67,7 @@ export METABASE_POD_NAME=$(kubectl get pods --namespace argo -l "app=metabase,re
 kubectl port-forward --namespace argo $METABASE_POD_NAME 8080:3000
 ```
 
-> http://localhost:8080
+> http://localhost:8080 (login: devuser@somemail.com / metabase_password1. )
 
 
 #### Accessing DB
