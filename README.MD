@@ -34,9 +34,8 @@ cd dev
 #### Argo 
 
 During the deploy there are two workflows deployed on argo.
- - Data Migration workflow which creates the tables needed for the example. The Migrations is using a clojure library ragtime to handle migrations.
- - Covid19uk Data Pileine which is a cron workflow (runs every hour) that runs a template workflow that represents the pipeline. On the first run to ingest
- all covid data it will take around 30m.
+ - Data Migration workflow which creates the table needed for the example. The Migration is using a clojure library (ragtime) to handle migrations.
+ - Covid19uk Data Pileine which is a cron workflow (runs every hour) that runs a template workflow that represents the pipeline. On the first run it will take around 30m.
 
  To access Argo you can portforward to the pod:
 
@@ -45,7 +44,7 @@ export ARGO_POD_NAME=$(kubectl get pods --namespace argo -l "app=argo-server" -o
 kubectl port-forward --namespace argo $ARGO_POD_NAME 2746:2746
 ```
 
-Inside argo you can see what is running (also click on a workflow to see the details):
+See workflow dashboard (click on a workflow to see the details):
 
 > http://localhost:2746/workflows/argo
 
@@ -53,14 +52,14 @@ See the cron workflow (you can trigger the cron manually):
 
 > http://localhost:2746/cron-workflows/argo
 
-See the workflow template that is the base workflow for the pipeline (you can trigger the template with custom dates to make a backfill):
+See the workflow template which is the base workflow for the pipeline (it's possible to trigger the template with custom dates to make a backfill):
 
 > http://localhost:2746/workflow-templates/argo
 
 
 #### Metabase (login is devuser@somemail.com / metabase_password1.)
 
-There is an instance of metabase deployed with the example which is user friendly to see the data. There is a pre-made
+There is an instance of metabase deployed with the example that allows to view the data. There is a pre-made
 question created to show covid19 Data (just click in browse all items on the homepage)
 
 ```bash
@@ -73,7 +72,7 @@ kubectl port-forward --namespace argo $METABASE_POD_NAME 8080:3000
 
 #### Accessing DB
 
-If you want to access the database directly:
+To access database directly:
 
 ```bash
  export POSTGRES_PASSWORD=$(kubectl get secret --namespace argo postgres-postgresql -o jsonpath="{.data.postgresql-password}" | base64 --decode)
