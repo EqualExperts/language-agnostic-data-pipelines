@@ -20,7 +20,7 @@ brew intall leiningen
 ```
 Apart from general development tools like docker and jdk11.
 
-### Running locally:
+### Deploy locally:
 
 ```bash
 minikube start covid19_cluster
@@ -28,26 +28,55 @@ cd dev
 ./deploy-argo.sh && ./deploy-db.sh && ./deploy-db-migrations-workflow.sh && ./deploy-covid19-workflow.sh && ./deploy-metabase.sh
 ```
 
-#### Accessing Argo:
-```bash
+### Walkthrough
+
+
+#### Argo 
+
+During the deploy there are two workflows deployed on argo.
+ - Data Migration workflow which creates the tables needed for the example. The Migrations is using a clojure library ragtime to handle migrations.
+ - Covid19uk Data Pileine which is a cron workflow (runs every hour) that runs a template workflow that represents the pipeline. On the first run to ingest
+ all covid data it will take around 30m.
+
+ To access Argo you can portforward to the pod:
+
+ ```bash
 export ARGO_POD_NAME=$(kubectl get pods --namespace argo -l "app=argo-server" -o jsonpath="{.items[0].metadata.name}")
 kubectl port-forward --namespace argo $ARGO_POD_NAME 2746:2746
 ```
 
+Inside argo you can see what is running (also click on a workflow to see the details):
+
 > http://localhost:2746/workflows/argo
 
-The job is scheduled to run every hour, but it can be triggered manually, just go into the cron option, and trigger the cron without parameters.
+See the cron workflow (you can trigger the cron manually):
 
-#### Accessing DB
-```bash
- export POSTGRES_PASSWORD=$(kubectl get secret --namespace argo postgres-postgresql -o jsonpath="{.data.postgresql-password}" | base64 --decode)
- kubectl run postgres-postgresql-psql --rm --tty -i --restart='Never' --namespace argo --image docker.io/bitnami/postgresql:11.11.0-debian-10-r31 --env="PGPASSWORD=$POSTGRES_PASSWORD" --command -- psql --host postgres-postgresql -U covid19_user -d covid19_dev -p 5432
-```
+> http://localhost:2746/cron-workflows/argo
 
-#### Accessing Metabase (login is devuser@somemail.com / metabase_password1.)
+See the workflow template that is the base workflow for the pipeline (you can trigger the template with custom dates to make a backfill):
+
+> http://localhost:2746/workflow-templates/argo
+
+
+#### Metabase (login is devuser@somemail.com / metabase_password1.)
+
+There is an instance of metabase deployed with the example which is user friendly to see the data. There is a pre-made
+question created to show covid19 Data (just click in browse all items on the homepage)
+
 ```bash
 export METABASE_POD_NAME=$(kubectl get pods --namespace argo -l "app=metabase,release=metabase" -o jsonpath="{.items[0].metadata.name}")
 kubectl port-forward --namespace argo $METABASE_POD_NAME 8080:3000
 ```
 
 > http://localhost:8080
+
+
+#### Accessing DB
+
+If you want to access the database directly:
+
+```bash
+ export POSTGRES_PASSWORD=$(kubectl get secret --namespace argo postgres-postgresql -o jsonpath="{.data.postgresql-password}" | base64 --decode)
+ kubectl run postgres-postgresql-psql --rm --tty -i --restart='Never' --namespace argo --image docker.io/bitnami/postgresql:11.11.0-debian-10-r31 --env="PGPASSWORD=$POSTGRES_PASSWORD" --command -- psql --host postgres-postgresql -U covid19_user -d covid19_dev -p 5432
+```
+

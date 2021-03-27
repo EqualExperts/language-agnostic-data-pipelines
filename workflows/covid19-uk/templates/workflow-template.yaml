@@ -15,11 +15,11 @@ spec:
   templates:
     - name: ingestion
       steps:
-        - - name: ExtractAndLoad
+        - - name: Ingestion
             template: covid19-uk
-        - - name: Transform
+        - - name: Transformation
             template: dbt-run   
-        - - name: Test
+        - - name: DataQualityCheck
             template: dbt-test    
     - name: covid19-uk
       container:
