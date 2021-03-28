@@ -1,6 +1,6 @@
 ## Language Agnostic Data Pipelines (Using Argo and Dbt)
 
-Usually the data frameworks for data pipelines are python centric, so the goal of this project is to define a strategy/architecture that can be used by teams that are using python, but also other by teams that uses different programming languages without requiring the effor to have another programming language in the codebase. Also, believing that software engineers can contribute to the data space, an architecture for data pipelines that is not python centric can be usefull to increase the collaboration between software engineers and data engineers.
+Usually the data frameworks for data pipelines are python centric, so the goal of this project is to define a strategy/architecture that can be used by teams which use any programming languages without requiring the effor to have another programming language in the codebase. Also, believing that software engineers can contribute to the data space, an architecture for data pipelines that is not python centric can be usefull to increase the collaboration between software engineers and data engineers.
 
 This project contains a sample use case that contains a data pipeline to ingest uk covid19 data (https://api.coronavirus.data.gov.uk). 
 
