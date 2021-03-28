@@ -1,14 +1,29 @@
 ## Language Agnostic Data Pipelines (Using Argo and Dbt)
 
+Usually the data frameworks for data pipelines are python centric, so the goal of this project is to define a strategy/architecture that can be used by teams that are using python, but also other by teams that uses different programming languages without requiring the effor to have another programming language in the codebase. Also, believing that software engineers can contribute to the data space, an architecture for data pipelines that is not python centric can be usefull to increase the collaboration between software engineers and data engineers.
 
-This is a complete use case that contains a data pipeline to ingest uk covid19 data (https://api.coronavirus.data.gov.uk). 
-The Ingestion (inside workflow tasks) is a clojure project and it was developed using practises like TDD. 
-The Pipeline has data quality tests that run each time data is ingested, checking for null values on columns that should not be null, also for negative numbers of cases that should not happen.
+This project contains a sample use case that contains a data pipeline to ingest uk covid19 data (https://api.coronavirus.data.gov.uk). 
 
-It uses a local kubernetes cluster which launches Argo and a database where covid19 data is loaded and transformed. Also to see the data we are spinning up an instance of metabase connected to the same database.
+## There are 3 main concepts
 
-The intent of the repo is to share this approach to make data pipelines with the simplest data pipeline that can be easily changed and adapted. 
-There wasn't any effort to make complex analytics transformations or to handle a large amount of data. 
+### Connectors
+Connectors are projects which ingest data from somewhere and write data into a staging table in a warehouse.
+The covid19 connector is coded in clojure and it was developed using practises like tdd.
+Connectors should support backfilling with custom dates if needed.
+
+There is freedom to create connectors in different programming languages, the only requirement is each connector should be dockerized.
+
+### Data models
+Data models is a dbt project which contains the models that are created/transformed on each data pipeline.
+Also, it contains data quality checks using dbt as well.
+
+### Data pipelines
+Data Pipelines are composed by Argo Workflows which orchestrate the connectors and the data models. 
+For each data pipeline, it should be created a workflow template defining the DAG that represents the pipeline, and a chron workflow to schedule the template.
+
+## Run (locally)
+The project uses a local kubernetes cluster to deploy Argo, a sample database, and an instance of metabase wich is user friendly to see the data.
+To run the project you need docker and jdk11 and the following requirements:
 
 ### Requirements (osx using homebrew):
 ```bash
@@ -24,7 +39,7 @@ Apart from general development tools like docker and jdk11.
 
 ```bash
 minikube start covid19_cluster
-cd dev
+cd scripts
 ./deploy-argo.sh && ./deploy-db.sh && ./deploy-db-migrations-workflow.sh && ./deploy-covid19-workflow.sh && ./deploy-metabase.sh
 ```
 
@@ -79,3 +94,10 @@ To access database directly:
  kubectl run postgres-postgresql-psql --rm --tty -i --restart='Never' --namespace argo --image docker.io/bitnami/postgresql:11.11.0-debian-10-r31 --env="PGPASSWORD=$POSTGRES_PASSWORD" --command -- psql --host postgres-postgresql -U covid19_user -d covid19_dev -p 5432
 ```
 
+
+#### k9s
+Instead of using the portforwaring on terminal, you can use k9s if you are familiar.
+
+```bash
+brew install k9s
+```
