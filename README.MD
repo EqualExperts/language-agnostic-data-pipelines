@@ -4,7 +4,7 @@ Usually the data frameworks for data pipelines are python centric, so the goal o
 
 This project contains a sample use case that contains a data pipeline to ingest uk covid19 data (https://api.coronavirus.data.gov.uk). 
 
-## There are 3 main concepts
+## Main concepts
 
 ### Connectors
 Connectors are projects which ingest data from somewhere and write data into a staging table in a warehouse.
