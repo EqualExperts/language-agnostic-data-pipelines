@@ -1,6 +1,6 @@
 ## Language Agnostic Data Pipelines (Using Argo and Dbt)
 
-Usually the data frameworks for data pipelines are python centric, so the goal of this project is to define a strategy/architecture that can be used by teams which use any programming languages without requiring the effor to have another programming language in the codebase. Also, believing that software engineers can contribute to the data space, an architecture for data pipelines that is not python centric can be usefull to increase the collaboration between software engineers and data engineers.
+Usually the frameworks for data pipelines are python centric, so the goal of this project is to define a strategy/architecture that can be used by teams which use any programming languages without requiring the effor to have another programming language in the codebase. Also, believing that software engineers can contribute to the data space, an architecture for data pipelines that is not python centric can be usefull to increase the collaboration between software engineers and data engineers.
 
 This project contains a sample use case that contains a data pipeline to ingest uk covid19 data (https://api.coronavirus.data.gov.uk). 
 
@@ -19,7 +19,7 @@ Also, it contains data quality checks using dbt as well.
 
 ### Data pipelines
 Data Pipelines are composed by Argo Workflows which orchestrate the connectors and the data models. 
-For each data pipeline, it should be created a workflow template defining the DAG that represents the pipeline, and a chron workflow to schedule the template.
+For each data pipeline, it should be created a workflow template defining the DAG that represents the pipeline, and a cron workflow to schedule the template.
 
 ## Run (locally)
 The project uses a local kubernetes cluster to deploy Argo, a sample database, and an instance of metabase wich is user friendly to see the data.
