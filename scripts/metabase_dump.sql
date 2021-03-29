@@ -6083,5 +6083,3 @@ ALTER TABLE ONLY public.view_log
 --
 -- PostgreSQL database dump complete
 --
-
-pod "postgres-postgresql-client" deleted

@@ -1,6 +1,6 @@
 ## Language Agnostic Data Pipelines (Using Argo and Dbt)
 
-Usually the frameworks for data pipelines are python centric and the goal of this project is to define an architecture that can be used by teams which use a different programming language without requiring the effor to have python in the codebase. Also, believing that software engineers can contribute to the data space, an architecture for data pipelines that is not python centric can be usefull to increase the collaboration between software engineers and data engineers.
+Usually the frameworks for data pipelines are python centric and the goal of this project is to define an architecture that can be used by teams which use a different programming language without requiring the effort to have python in the codebase. Also, believing that software engineers can contribute to the data space, an architecture for data pipelines that is not python centric can be usefull to increase the collaboration between software engineers and data engineers.
 
 Using Argo and dbt allows to create a language agnostic architecture to data pipelines.
 
