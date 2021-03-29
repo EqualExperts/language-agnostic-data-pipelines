@@ -29,5 +29,5 @@ kubectl -n argo delete cwf covid19-uk
 # create workflow template on argo
 argo -n argo cron create outputs/covid19-uk/templates/cron-workflow.yaml
 
-# triggering cron without waiting for the schedule
-argo cron -n argo resume covid19-uk
+# trigger workflow template on argo
+argo submit --from workflowtemplate/covid19-uk -n argo -p start-date="" -p end-date=""
