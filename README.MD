@@ -1,21 +1,22 @@
 ## Language Agnostic Data Pipelines (Using Argo and Dbt)
 
-Usually the frameworks for data pipelines are python centric, so the goal of this project is to define a strategy/architecture that can be used by teams which use any programming languages without requiring the effor to have another programming language in the codebase. Also, believing that software engineers can contribute to the data space, an architecture for data pipelines that is not python centric can be usefull to increase the collaboration between software engineers and data engineers.
+Usually the frameworks for data pipelines are python centric and the goal of this project is to define an architecture that can be used by teams which use a different programming language without requiring the effor to have python in the codebase. Also, believing that software engineers can contribute to the data space, an architecture for data pipelines that is not python centric can be usefull to increase the collaboration between software engineers and data engineers.
 
-This project contains a sample use case that contains a data pipeline to ingest uk covid19 data (https://api.coronavirus.data.gov.uk). 
+Using Argo and dbt allows to create a language agnostic architecture to data pipelines.
+
+This project contains a reference implementation with a data pipeline to ingest uk covid19 data (https://api.coronavirus.data.gov.uk). 
 
 ## Main concepts
 
 ### Connectors
-Connectors are projects which ingest data from somewhere and write data into a staging table in a warehouse.
+Connectors are projects which ingest data from a source and write data into a staging table in a warehouse.
 The covid19 connector is coded in clojure and it was developed using practises like tdd.
-Connectors should support backfilling with custom dates if needed.
+Connectors should support backfilling with provided dates if needed.
 
 There is freedom to create connectors in different programming languages, the only requirement is each connector should be dockerized.
 
 ### Data models
-Data models are a dbt project which contains the models that are created on each data pipeline.
-Also, it contains data quality checks.
+Data models are a dbt project which contains the models that are created on each data pipeline. Also, it contains data quality checks.
 
 ### Data pipelines
 Data Pipelines are composed by Argo Workflows which orchestrate the connectors and the data models. 
