@@ -14,12 +14,12 @@ Connectors should support backfilling with custom dates if needed.
 There is freedom to create connectors in different programming languages, the only requirement is each connector should be dockerized.
 
 ### Data models
-Data models is a dbt project which contains the models that are created/transformed on each data pipeline.
-Also, it contains data quality checks using dbt as well.
+Data models are a dbt project which contains the models that are created on each data pipeline.
+Also, it contains data quality checks.
 
 ### Data pipelines
 Data Pipelines are composed by Argo Workflows which orchestrate the connectors and the data models. 
-For each data pipeline, it should be created a workflow template defining the DAG that represents the pipeline, and a cron workflow to schedule the template.
+For each data pipeline, it could be created a workflow template defining the DAG that represents the pipeline, and a cron workflow to schedule the template.
 
 ## Run (locally)
 The project uses a local kubernetes cluster to deploy Argo, a sample database, and an instance of metabase wich is user friendly to see the data.
@@ -49,8 +49,8 @@ cd scripts
 ### Argo Workflows 
 
 During the deploy there are two workflows deployed on argo.
- - Data Migration workflow which creates the table needed for the example. The Migration is using a clojure library (ragtime) to handle migrations.
- - Covid19uk Data Pileine which is a cron workflow (runs every hour) that runs a template workflow that represents the pipeline. On the first run it will take around 30m.
+ - Data Migration workflow creates the table needed for the example. The Migration is using a clojure library (ragtime) to handle migrations.
+ - Covid19uk Data Pileine is a cron workflow (runs every hour) that runs a template workflow that represents the pipeline. On the first run it will take around 30m.
 
  To access Argo you can portforward to the pod:
 
