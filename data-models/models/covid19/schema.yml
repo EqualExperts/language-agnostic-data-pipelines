@@ -3,7 +3,7 @@ version: 2
 
 models:
     - name: covid_19_cases_per_day
-      description: "A starter dbt model"
+      description: "A view with UK covid-19 cases by day"
       columns:
           - name: day
             description: "Day"
@@ -11,5 +11,5 @@ models:
                 - unique
                 - not_null
           - name: cases
-            description: "Daily covid19 cases in Uk"
+            description: "Number of covid-19 cases"
         

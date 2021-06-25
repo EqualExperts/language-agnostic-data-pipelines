@@ -1,0 +1,8 @@
+{:db {:dbtype "postgresql"
+      :classname "org.postgresql.Driver"
+      :dbname "covid19_test"
+      :host "postgres-postgresql"
+      :port 5432
+      :user "covid19_user"
+      :password "covid19_password"}
+ }

@@ -45,7 +45,7 @@ spec:
         command: ["/bin/sh", "-c"]
         args:
           - >-
-            dbt run --project-dir data-models --profiles-dir resources/ --profile {{ .Values.environment }}  -m models/example/covid_19_cases_per_day.sql
+            dbt run --project-dir data-models --profiles-dir resources/ --profile {{ .Values.environment }}
     - name: dbt-test
       container:
         name: dbt-test

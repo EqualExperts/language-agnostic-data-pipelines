@@ -20,6 +20,9 @@
                    :source-paths ["dev"]
                    :repl-options {:init-ns user}}
              :db-migrations { :uberjar-name "db-migrations.jar"
-                         :main common.database.migrations}
+                              :main common.database.migrations
+                             
+                              :dependencies [] 
+                             }
 
              :uberjar {:aot :all}})

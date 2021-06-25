@@ -7,6 +7,18 @@ dev:
       user: "covid19_user"
       pass: "covid19_password"
       port: 5432
-      schema: "public"
+      schema: "analytics"
       dbname: "covid19_dev"
+      threads: 1
+test:
+  target: covid19_test
+  outputs:
+    covid19_test:
+      type: postgres
+      host: "localhost"
+      user: "covid19_user"
+      pass: "covid19_password"
+      port: 5432
+      schema: "analytics"
+      dbname: "covid19_test"
       threads: 1

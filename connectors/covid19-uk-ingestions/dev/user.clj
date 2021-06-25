@@ -1,6 +1,7 @@
 (ns user
   (:require [eftest.runner :as ef]
-            [clojure.tools.namespace.repl :refer [refresh-all]]))
+            [clojure.tools.namespace.repl :refer [refresh-all]]
+            [common.database.migrations :refer [perform-db-migrations rollback-previous-migration]]))
 
 (defn run-tests
   "Refresh all code, then run tests"

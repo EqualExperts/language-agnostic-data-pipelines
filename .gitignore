@@ -16,3 +16,4 @@ pom.xml.asc
 pom.xml
 .clj-kondo/.cache/
 outputs
+outputs-*

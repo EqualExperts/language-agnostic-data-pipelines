@@ -1,0 +1,1 @@
+select * from covid_19_ingestion

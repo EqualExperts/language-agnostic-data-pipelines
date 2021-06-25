@@ -3988,13 +3988,13 @@ MetabaseScheduler	metabase.task.update-field-values.trigger.3	DEFAULT	metabase.t
 --
 
 COPY public.query (query_hash, average_execution_time, query) FROM stdin;
-\\x88eb2cb40e20602fc92fc699c4382d37c370905c50b932167f6e6471929ed910	365	{"type":"native","native":{"query":"select * from covid_19_cases_per_day","template-tags":{}},"database":2,"middleware":{"add-default-userland-constraints?":true}}
+\\x88eb2cb40e20602fc92fc699c4382d37c370905c50b932167f6e6471929ed910	365	{"type":"native","native":{"query":"select * from analytics.covid_19_cases_per_day","template-tags":{}},"database":2,"middleware":{"add-default-userland-constraints?":true}}
 \\xbcab772bded8062cae2820d06b0d70269b89051f719bff5296bf343b06d126f5	578	{"database":2,"query":{"source-table":6},"type":"query","middleware":{"add-default-userland-constraints?":true}}
 \\x103fe9e491bf5de3905337700fad9ae72e10c9f462e1b1b35534d4c9c2a57c5e	418	{"database":2,"query":{"source-table":7},"type":"query","middleware":{"add-default-userland-constraints?":true}}
-\\x120a46ddf8777087876693af6a58807c6998e59ffbb08a899c7c60a9a95fda4c	345	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"native","middleware":null,"native":{"query":"select * from covid_19_cases_per_day","template-tags":{}},"database":2,"async?":true,"cache-ttl":null}
+\\x120a46ddf8777087876693af6a58807c6998e59ffbb08a899c7c60a9a95fda4c	345	{"constraints":{"max-results":10000,"max-results-bare-rows":2000},"type":"native","middleware":null,"native":{"query":"select * from analytics.covid_19_cases_per_day","template-tags":{}},"database":2,"async?":true,"cache-ttl":null}
 \\xb8b399332acd53f1a6bd854a253b00560e152d49553494d45dca037af2515b1a	54	{"database":3,"query":{"source-table":9},"type":"query","middleware":{"add-default-userland-constraints?":true}}
 \\x853a663ec8859e97a6f4e97c01aa167d507bc9cc17faffd18099b1f305392edb	1300	{"database":3,"query":{"source-table":10},"type":"query","middleware":{"add-default-userland-constraints?":true}}
-\\x8fe3a4c0d9499d6dcdfb5d3d0878cd297933600d41f94c8fd3730e4473962d0e	984	{"type":"native","native":{"query":"select * from covid_19_cases_per_day","template-tags":{}},"database":3,"middleware":{"add-default-userland-constraints?":true}}
+\\x8fe3a4c0d9499d6dcdfb5d3d0878cd297933600d41f94c8fd3730e4473962d0e	984	{"type":"native","native":{"query":"select * from analytics.covid_19_cases_per_day","template-tags":{}},"database":3,"middleware":{"add-default-userland-constraints?":true}}
 \.
 
 
@@ -4030,7 +4030,7 @@ COPY public.query_execution (id, hash, started_at, running_time, result_rows, na
 --
 
 COPY public.report_card (id, created_at, updated_at, name, description, display, dataset_query, visualization_settings, creator_id, database_id, table_id, query_type, archived, collection_id, public_uuid, made_public_by_id, enable_embedding, embedding_params, cache_ttl, result_metadata, collection_position) FROM stdin;
-2	2021-03-20 19:12:07.206194+00	2021-03-20 19:12:07.206194+00	Covid19 Daily Cases in UK	\N	line	{"type":"native","native":{"query":"select * from covid_19_cases_per_day","template-tags":{}},"database":3}	{"graph.dimensions":["day"],"graph.metrics":["cases"]}	2	3	\N	native	f	\N	\N	\N	f	\N	\N	[{"base_type":"type/Date","display_name":"day","name":"day","special_type":null,"fingerprint":{"global":{"distinct-count":445,"nil%":0},"type":{"type/DateTime":{"earliest":"2020-01-01T00:00:00Z","latest":"2021-03-20T00:00:00Z"}}}},{"base_type":"type/Integer","display_name":"cases","name":"cases","special_type":null,"fingerprint":{"global":{"distinct-count":376,"nil%":0},"type":{"type/Number":{"min":0,"q1":478.5387465890867,"q3":12969.465360340368,"max":61757,"sd":12152.777087524772,"avg":8257.231460674157}}}}]	\N
+2	2021-03-20 19:12:07.206194+00	2021-03-20 19:12:07.206194+00	Covid19 Daily Cases in UK	\N	line	{"type":"native","native":{"query":"select * from analytics.covid_19_cases_per_day","template-tags":{}},"database":3}	{"graph.dimensions":["day"],"graph.metrics":["cases"]}	2	3	\N	native	f	\N	\N	\N	f	\N	\N	[{"base_type":"type/Date","display_name":"day","name":"day","special_type":null,"fingerprint":{"global":{"distinct-count":445,"nil%":0},"type":{"type/DateTime":{"earliest":"2020-01-01T00:00:00Z","latest":"2021-03-20T00:00:00Z"}}}},{"base_type":"type/Integer","display_name":"cases","name":"cases","special_type":null,"fingerprint":{"global":{"distinct-count":376,"nil%":0},"type":{"type/Number":{"min":0,"q1":478.5387465890867,"q3":12969.465360340368,"max":61757,"sd":12152.777087524772,"avg":8257.231460674157}}}}]	\N
 \.
 
 
@@ -4063,8 +4063,8 @@ COPY public.report_dashboardcard (id, created_at, updated_at, "sizeX", "sizeY", 
 --
 
 COPY public.revision (id, model, model_id, user_id, "timestamp", object, is_reversion, is_creation, message) FROM stdin;
-1	Card	1	1	2021-03-20 09:51:03.655575+00	{"description":null,"archived":false,"collection_position":null,"table_id":null,"database_id":2,"enable_embedding":false,"collection_id":null,"query_type":"native","name":"Covid19 Daily Cases in UK","creator_id":1,"made_public_by_id":null,"embedding_params":null,"cache_ttl":null,"dataset_query":{"type":"native","native":{"query":"select * from covid_19_cases_per_day","template-tags":{}},"database":2},"id":1,"display":"line","visualization_settings":{"graph.dimensions":["day"],"graph.metrics":["cases"]},"public_uuid":null}	f	t	\N
-2	Card	2	2	2021-03-20 19:12:07.264754+00	{"description":null,"archived":false,"collection_position":null,"table_id":null,"database_id":3,"enable_embedding":false,"collection_id":null,"query_type":"native","name":"Covid19 Daily Cases in UK","creator_id":2,"made_public_by_id":null,"embedding_params":null,"cache_ttl":null,"dataset_query":{"type":"native","native":{"query":"select * from covid_19_cases_per_day","template-tags":{}},"database":3},"id":2,"display":"line","visualization_settings":{"graph.dimensions":["day"],"graph.metrics":["cases"]},"public_uuid":null}	f	t	\N
+1	Card	1	1	2021-03-20 09:51:03.655575+00	{"description":null,"archived":false,"collection_position":null,"table_id":null,"database_id":2,"enable_embedding":false,"collection_id":null,"query_type":"native","name":"Covid19 Daily Cases in UK","creator_id":1,"made_public_by_id":null,"embedding_params":null,"cache_ttl":null,"dataset_query":{"type":"native","native":{"query":"select * from analytics.covid_19_cases_per_day","template-tags":{}},"database":2},"id":1,"display":"line","visualization_settings":{"graph.dimensions":["day"],"graph.metrics":["cases"]},"public_uuid":null}	f	t	\N
+2	Card	2	2	2021-03-20 19:12:07.264754+00	{"description":null,"archived":false,"collection_position":null,"table_id":null,"database_id":3,"enable_embedding":false,"collection_id":null,"query_type":"native","name":"Covid19 Daily Cases in UK","creator_id":2,"made_public_by_id":null,"embedding_params":null,"cache_ttl":null,"dataset_query":{"type":"native","native":{"query":"select * from analytics.covid_19_cases_per_day","template-tags":{}},"database":3},"id":2,"display":"line","visualization_settings":{"graph.dimensions":["day"],"graph.metrics":["cases"]},"public_uuid":null}	f	t	\N
 \.
 
 

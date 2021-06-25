@@ -1,9 +1,9 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Workflow
 metadata:
-  generateName: db-migrations
+  generateName: db-migrations-{{ .Values.environment }}
   namespace: argo
-  name: "{{ .Release.Name }}"
+  name: "{{ .Release.Name }}-{{ .Values.environment }}"
 spec:
   entrypoint: db-migrations
   serviceAccountName: argo

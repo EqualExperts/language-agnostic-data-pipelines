@@ -1,0 +1,15 @@
+
+version: 2
+
+models:
+    - name: covid_19_ingestion
+      description: "The staging table for covid-19 data"
+      columns:
+          - name: day
+            description: "Day"
+            tests:
+                - unique
+                - not_null
+          - name: payload
+            description: "The payload from the covid-19 api"
+        
