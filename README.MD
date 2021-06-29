@@ -1,4 +1,4 @@
-# Language Agnostic Data Pipelines
+# Language-agnostic data pipelines
 
 In some situations a tool like Matillion, Stitchdata or Fivetran can be a quick and reliable way to achieve the client's needs, although it’s not the best choice for all of our clients. 
 These ETL tools work  well when using the existing connectors, although when the majority of the cases do not use the premade connectors, it’s certainly not the best approach. There is also an extra price when using these tools, apart from the usual cost. Making the data pipelines working in a CI/CD environment is always harder. So, in some cases, it’s preferable to make a code-friendly approach to data pipelines.
