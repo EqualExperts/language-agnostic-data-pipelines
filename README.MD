@@ -11,7 +11,7 @@ These ETL tools work  well when using the existing connectors, although when the
 - The code can be developed in multiple languages to fit each client skill set when python is not a first class citizen. 
 - Run in different clouds (aws, gcp)
 
-This repository contains a reference implementation for an architecture that we've been using. This solution can be used with any programming language. 
+This repository contains a reference implementation for a language agnostic data pipelines architecture that we've been using. 
 
 
 #### Architecture:
