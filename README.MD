@@ -61,6 +61,7 @@ brew install kubectl
 brew install argo
 brew install helm
 brew install leiningen
+brew tap dbt-labs/dbt
 brew install dbt
 ```
 Apart from general development tools like docker and jdk11.
