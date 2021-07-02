@@ -1,0 +1,9 @@
+export COVID19_POSTGRES_USER=covid19_user
+export COVID19_POSTGRES_PASS=covid19_password
+export COVID19_POSTGRES_DB=covid19_dev
+export COVID19_POSTGRES_PORT=5432
+export METABASE_POSTGRES_USER=metabase_user
+export METABASE_POSTGRES_PASS=metabase_password
+export METABASE_POSTGRES_DB=metabase
+export METABASE_POSTGRES_PORT=5433
+

@@ -71,7 +71,7 @@ Apart from general development tools like docker and jdk11.
 ```bash
 minikube start
 cd scripts
-./deploy-argo.sh && ./deploy-db.sh && ./deploy-db-migrations-workflow.sh && ./deploy-covid19-workflow.sh && ./deploy-metabase.sh
+source local-env.sh &&./deploy-argo.sh && ./deploy-db.sh && ./deploy-db-migrations-workflow.sh && ./deploy-covid19-workflow.sh && ./deploy-metabase.sh
 ```
 
 ## Walkthrough
@@ -80,8 +80,8 @@ cd scripts
 ### Argo Workflows 
 
 During the deploy there are two workflows deployed on Argo.
- - Data Migration workflow creates the table needed for the example. The Migration is using a Clojure library (ragtime) to handle migrations.
- - Covid19uk Data Pileine is a cron workflow (runs every hour) that runs a template workflow that represents the pipeline. On the first run, it will take around 30m.
+ - Data Migration workflow that creates the table needed for the example. The Migration is using a Clojure library (ragtime) to handle migrations.
+ - Covid19uk Data Piline is a cron workflow (runs every hour) that runs a template workflow that represents the pipeline. On the first run, it will take around 30m.
 
  To access Argo you can portforward to the pod:
 
