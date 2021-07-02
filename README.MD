@@ -60,7 +60,7 @@ brew install minikube
 brew install kubectl
 brew install argo
 brew install helm
-brew intall leiningen
+brew install leiningen
 brew install dbt
 ```
 Apart from general development tools like docker and jdk11.
