@@ -1,26 +1,28 @@
 # Language-agnostic data pipelines
 
-In some situations a tool like Matillion, Stitchdata or Fivetran can be a quick and reliable way to achieve the client's needs, although it’s not the best choice for all of our clients. 
-These ETL tools work  well when using the existing connectors, although when the majority of the cases do not use the premade connectors, it’s certainly not the best approach. There is also an extra price when using these tools, apart from the usual cost. Making the data pipelines working in a CI/CD environment is always harder. So, in some cases, it’s preferable to make a code-friendly approach to data pipelines.
+In some situations a tool like Matillion, Stitchdata or Fivetran can be the best approach, although it’s not the best choice for all of our client’s use cases. These ETL tools work well when using the existing pre-made connectors, although when the majority of the data integrations are custom connectors, it’s certainly not the best approach. Apart from the known cost, there is also an indirect price when using these kinds of tools - the effort to make the data pipelines working in a CI/CD environment. Also, at Equal Experts, we advocate we should test each step of the pipeline, and if possible, develop them using test driven development - and this is near impossible in these cases. 
+
+That being said, for the cases when an ETL tool won’t fit our needs, we identified the need of having a reference implementation that we can use for different clients. Since the skill set of each team is different, and sometimes Python is not an acquired skill, it was decided not to use the well known python tools that are used these days for data pipelines like  Apache Airflow or Dagster. 
 
 #### Main Requirements:   
-- Easy to orchestrate and support scheduling, backfilling and manual triggering
-- Testable
+Pipelines that are:
+- Easy to orchestrate
+- Support scheduling 
+- Support backfilling
+- Support testing on all the steps
 - Easy to integrate with custom APIs as sources of data
 - Easy to integrate in a CI/CD environment
-- The code can be developed in multiple languages to fit each client skill set when python is not a first class citizen. 
-- Run in different clouds (aws, gcp)
+- Easy to integrate with observability tools like grafana.
 
-This repository contains a reference implementation for a language agnostic data pipelines architecture that we've been using. 
-
+Also, since we work for multiple clients with multiple skillsets, the language to develop connectors should be any chosen language.
 
 #### Architecture:
 
 ##### Argo Workflows as the orchestrator
-Argo Workflows is a container-native workflow engine for orchestrating parallel jobs on Kubernetes. Argo represents workflows as Dags (directed acyclic graphs) and each step of the workflow is a container. Since data pipelines can be easily modeled as workflow it is a great tool to use. Also, we have freedom to choose which programming language to design the connectors or the transformations, the only requirement is that each step of the pipeline should be containerized.
+Argo Workflows is a container-native workflow engine for orchestrating parallel jobs on Kubernetes. Argo represents workflows as Dags (Directed Acyclic Graphs), and each step of the workflow is a container. Since data pipelines can be easily modeled as workflow it is a great tool to use. Also, we have freedom to choose which programming language to design the connectors or the transformations, the only requirement is that each step of the pipeline should be containerised.
 
 ##### Dbt (data build tool) as the T in ELT. 
-For the data transformations we found that dbt was our best choice. Dbt allows the transformations needed between the staging tables and the analytics tables. Dbt is SQL centric, so there isn't a need to learn another language. Also dbt has features that we wanted like testing and documentation generation and has native connections to Snowflake, BigQuery, Redshift and Postgres data warehouses. 
+For the data transformations, we found that dbt was our best choice. Dbt allows the transformations needed between the staging tables and the analytics tables. Dbt is SQL centric, so there isn't a need to learn another language. Also, dbt has features that we wanted like testing and documentation generation and has native connections to Snowflake, BigQuery, Redshift and Postgres data warehouses. 
 
 ##### A sample data pipeline:
 
@@ -43,12 +45,14 @@ The covid19 connector is coded in clojure and it was developed using practices l
 Connectors should support backfilling with provided dates if needed.
 The only requirement for connectors is being containerized applications.
 
+If you are able to use python, you could use singer.io (https://www.singer.io/) and leverage from premade connectors. 
+
 ### Data models
 Data models are composed of a dbt project which contains the models that are created on each data pipeline. Also, it contains data tests, schema tests, and model unit tests.
 
 ### Data pipelines
 Data Pipelines are composed of Argo Workflows which orchestrate the connectors and the data models. 
-For each data pipeline, it could be created a workflow template defining the DAG that represents the pipeline, and a cron workflow to schedule the template.
+For each data pipeline, it should be created a workflow template defining the DAG that represents the pipeline, and a cron workflow to schedule the template.
 
 ## Run
 The project uses a local kubernetes cluster to deploy Argo, a sample database, and an instance of Metabase which is user-friendly to see the data.
@@ -105,7 +109,7 @@ See the workflow template which is the base workflow for the pipeline (it's poss
 
 ### Metabase 
 
-There is an instance of Metabase deployed with the example that allows to view the data. There is a pre-made
+There is an instance of Metabase deployed with the example just to illustrate and to allow an easy way to view the data. There is a pre-made
 question created to show covid19 Data (just click in browse all items on the homepage)
 
 ```bash
