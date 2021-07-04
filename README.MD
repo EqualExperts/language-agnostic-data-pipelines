@@ -87,25 +87,30 @@ During the deploy there are two workflows deployed on Argo.
  - Data Migration workflow that creates the table needed for the example. The Migration is using a Clojure library (ragtime) to handle migrations.
  - Covid19uk Data Piline is a cron workflow (runs every hour) that runs a template workflow that represents the pipeline. On the first run, it will take around 30m.
 
- To access Argo you can portforward to the pod:
+To access Argo you can use the cli:
+
+List workflows
+```
+argo -n argo list
+```
+
+List templates
+```
+argo -n argo template list
+```
+
+List crons
+```
+argo -n argo cron list
+```
+
+
+Or you can access Argo UI you can portforward to the pod:
 
  ```bash
 export ARGO_POD_NAME=$(kubectl get pods --namespace argo -l "app=argo-server" -o jsonpath="{.items[0].metadata.name}")
 kubectl port-forward --namespace argo $ARGO_POD_NAME 2746:2746
 ```
-
-See workflow dashboard (click on a workflow to see the details):
-
-> http://localhost:2746/workflows/argo
-
-See the cron workflow (you can trigger the cron manually):
-
-> http://localhost:2746/cron-workflows/argo
-
-See the workflow template which is the base workflow for the pipeline (it's possible to trigger the template with custom dates to make a backfill):
-
-> http://localhost:2746/workflow-templates/argo
-
 
 ### Metabase 
 
